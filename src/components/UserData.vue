@@ -1,6 +1,6 @@
 <template>
   <section>
-    <form>
+    <form @submit.prevent="submitData">
       <label>Name: </label>
       <input type="text" placeholder="Your name" v-model="enteredName" />
       <label>Age: </label>
@@ -11,11 +11,17 @@
 </template>
 <script>
 export default {
+  emits: ["set-data"],
   data() {
     return {
       enteredName: "",
       enteredAge: "",
     };
+  },
+  methods: {
+    submitData() {
+      this.$emit("set-data", this.enteredName, this.enteredAge);
+    },
   },
 };
 </script>
